@@ -4,32 +4,41 @@
 """
 
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+#from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyOAuth
 
-def authorize():
+def authorize(scope = 'playlist-modify-public'):
     try:
-        from botify_settings import client_id, client_secret
-        auth_manager = SpotifyClientCredentials(
+        from botify_settings import client_id, client_secret, redirect_uri, username
+        auth_manager = SpotifyOAuth(
             client_id = client_id,
-            client_secret = client_secret
+            client_secret = client_secret,
+            redirect_uri = redirect_uri,
+            username = username,
+            scope = scope
         )
-        sp = spotipy.Spotify(auth_manager = auth_manager, scope = scope)
+        
+        sp = spotipy.Spotify(auth_manager = auth_manager)
         return sp
     
     except:
         client_id = input('Client ID: ')
         client_secret = input('Client secret: ')
-        auth_manager = SpotifyClientCredentials(
+        username = input('Spotify username: ')
+        auth_manager = SpotifyOAuth(
             client_id = client_id,
-            client_secret = client_secret
+            client_secret = client_secret,
+            redirect_uri = 'http://localhost:8888/callback/',
+            username = username,
+            scope = scope
         )
         sp = spotipy.Spotify(auth_manager=auth_manager)
         
         with open('botify_settings.py', 'w') as f:
-            f.write(f"""client_id = '{client_id}'
-client_secret = '{client_secret}
-redirect_uri = 'http://localhost:8888/callback/'
-""")
+            f.write(f"client_id = '{client_id}'\n")
+            f.write(f"client_secret = '{client_secret}'\n")
+            f.write(f"redirect_uri = 'http://localhost:8888/callback/'\n")
+            f.write(f"username = '{username}'")
             f.close()
         return sp
 
