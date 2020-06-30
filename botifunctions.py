@@ -74,3 +74,10 @@ def get_track_ids_from_playlist(sp, playlist_id = ''):
     if len(track_ids) == 0:
         print('No tracks on this playlist.')
     return track_ids
+
+def add_tracks_to_playlist(sp, tracks_to_add, playlist_id, username):
+    try:
+        sp.add_tracks_to_playlist(username, playlist_id, discover_weekly_tracks)
+        return 1
+    except:
+        return 0
