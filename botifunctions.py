@@ -4,7 +4,6 @@
 """
 
 import spotipy
-#from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.oauth2 import SpotifyOAuth
 
 def authorize(scope = 'playlist-modify-public'):
@@ -77,7 +76,7 @@ def get_track_ids_from_playlist(sp, playlist_id = ''):
 
 def add_tracks_to_playlist(sp, tracks_to_add, playlist_id, username):
     try:
-        sp.add_tracks_to_playlist(username, playlist_id, discover_weekly_tracks)
+        sp.user_playlist_add_tracks(username, playlist_id, tracks_to_add)
         return 1
     except:
         return 0
