@@ -10,7 +10,7 @@ try:
 except ImportError:
     username = input('Spotify Username: ')
     with open('botify_settings.py', 'a') as f:
-        f.write(f"username = '{username}'")
+        f.write(f"username = '{username}'\n")
         f.close()
 
 try:
@@ -18,7 +18,7 @@ try:
 except ImportError:
     discover_weekly_id = input('Discover Weekly playlist ID: ')
     with open('botify_settings.py', 'a') as f:
-        f.write(f"discover_weekly_id = '{discover_weekly_id}'")
+        f.write(f"discover_weekly_id = '{discover_weekly_id}'\n")
         f.close()
 
 try:
@@ -26,7 +26,7 @@ try:
 except ImportError:
     discover_weeklies_id = input('Discover Weeklies playlist ID: ')
     with open('botify_settings.py', 'a') as f:
-        f.write(f"discover_weeklies_id = '{discover_weeklies_id}'")
+        f.write(f"discover_weeklies_id = '{discover_weeklies_id}'\n")
         f.close()
         
 sp = authorize()
